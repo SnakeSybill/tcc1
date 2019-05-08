@@ -1,0 +1,4 @@
+ID do grupo us-east-1_7kZWgVLCv
+ARN do grupo arn:aws:cognito-idp:us-east-1:695852367178:userpool/us-east-1_7kZWgVLCv
+
+ID do cliente de aplicativo: 2cui37p0d01f9t9984balmi4qv

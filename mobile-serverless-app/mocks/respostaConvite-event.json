@@ -1,0 +1,8 @@
+{
+  "body": "{\"idEvento\": \"3\", \"confirma\": true}",
+  "requestContext": {
+    "identity": {
+      "cognitoIdentityId": "USER-SUB-1234"
+    }
+  }
+}

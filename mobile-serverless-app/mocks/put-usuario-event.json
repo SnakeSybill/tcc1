@@ -1,0 +1,8 @@
+{
+    "body": "{\"content\":\"hello world\",\"attachment\":\"hello.jpg\", \"contatos\":[{\"usernameContato\":\"teste\"}], \"agenda\":[{\"idEvento\": \"teste\"}] }",
+    "requestContext": {
+      "identity": {
+        "cognitoIdentityId": "USER-SUB-1234-teste"
+      }
+    }
+  }

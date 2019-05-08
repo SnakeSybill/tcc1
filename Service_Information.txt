@@ -1,0 +1,38 @@
+Service Information
+service: mobile-serverless-app
+stage: dev
+region: us-east-1
+stack: mobile-serverless-app-dev
+resources: 84
+api keys:
+  None
+endpoints:
+  POST - https://1csou2et70.execute-api.us-east-1.amazonaws.com/dev/put-usuario
+  GET - https://1csou2et70.execute-api.us-east-1.amazonaws.com/dev/get-usuario/{id}
+  POST - https://1csou2et70.execute-api.us-east-1.amazonaws.com/dev/put-evento
+  GET - https://1csou2et70.execute-api.us-east-1.amazonaws.com/dev/get-evento
+  GET - https://1csou2et70.execute-api.us-east-1.amazonaws.com/dev/list-evento
+  DELETE - https://1csou2et70.execute-api.us-east-1.amazonaws.com/dev/delete-evento/{id}
+  POST - https://1csou2et70.execute-api.us-east-1.amazonaws.com/dev/put-convidado
+  GET - https://1csou2et70.execute-api.us-east-1.amazonaws.com/dev/list-convidados
+  POST - https://1csou2et70.execute-api.us-east-1.amazonaws.com/dev/put-meus-convites
+  GET - https://1csou2et70.execute-api.us-east-1.amazonaws.com/dev/list-meus-convites
+  DELETE - https://1csou2et70.execute-api.us-east-1.amazonaws.com/dev/resposta-convite/{id}
+functions:
+  PutUsuario: mobile-serverless-app-dev-PutUsuario
+  GetUsuario: mobile-serverless-app-dev-GetUsuario
+  PutEvento: mobile-serverless-app-dev-PutEvento
+  GetEvento: mobile-serverless-app-dev-GetEvento
+  ListEventos: mobile-serverless-app-dev-ListEventos
+  DeleteEvento: mobile-serverless-app-dev-DeleteEvento
+  PutConvidado: mobile-serverless-app-dev-PutConvidado
+  ListConvidados: mobile-serverless-app-dev-ListConvidados
+  PutMeusConvites: mobile-serverless-app-dev-PutMeusConvites
+  ListMeusConvites: mobile-serverless-app-dev-ListMeusConvites
+  RespostaConvite: mobile-serverless-app-dev-RespostaConvite
+layers:
+  None
+Serverless: Invoke aws:deploy:finalize
+Serverless: [AWS s3 200 0.757s 0 retries] listObjectsV2({ Bucket:
+   'mobile-serverless-app-de-serverlessdeploymentbuck-rn7e5r2iybvk',
+  Prefix: 'serverless/mobile-serverless-app/dev' })

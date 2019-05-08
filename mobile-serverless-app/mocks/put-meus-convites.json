@@ -1,0 +1,8 @@
+{
+    "body": "{\"usernameConvidado\": \"USER-SUB-1234\", \"idEvento\": \"3\", \"nomeEvento\": \"Evento-teste\"}" ,
+    "requestContext": {
+        "identity": {
+          "cognitoIdentityId": "USER-SUB-1234-teste"
+        }
+      }
+}
