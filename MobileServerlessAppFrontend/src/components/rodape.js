@@ -53,7 +53,7 @@ export default class Rodape extends Component {
                         <Button
                             title="Adicionar"
                             style={{ marginBottom: 10, }}
-                            onPress={() => this.props.navigation.navigate('addcontato')} />
+                            onPress={() => this.props.navigation.navigate('addevento')} />
                     </View>
                 );
             case "contatos":

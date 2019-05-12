@@ -11,10 +11,13 @@ export async function getUsuario(event, context) {
 
   try {
     const result = await dynamoDbLib.call("get", params);
+    console.log("IF (RESULT.ITEM): ", result.Item);
     if (result.Item) {
+      console.log("Entrou no IF");
       console.log("Resultado: ", result);
       return success(result.Item);
     } else {
+      console.log("Entrou no ELSE");
       return failure({ status: false, error: "Item not found." });
     }
   } catch (e) {

@@ -41,7 +41,7 @@ class Eventos extends Component {
                             {
                                 this.props.eventosCriadosUsuario.map((item, i) => (
                                     <TouchableOpacity>
-                                        <Text>{item.idEvento}</Text>
+                                        <Text>{item.nome}</Text>
                                     </TouchableOpacity>
                                 ))
                             }

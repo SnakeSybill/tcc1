@@ -16,6 +16,8 @@ export const LOADING = 'loading';
 //App
 export const GET_USUARIO_SUCESSO = 'get_usuario_sucesso';
 export const GET_USUARIO_ERRO = 'get_usuario_erro';
+export const GET_USUARIO_CONTATO_SUCESSO = 'get_usuario_contato_sucesso';
+export const GET_USUARIO_CONTATO_ERRO = 'get_usuario_contato_erro';
 export const PUT_USUARIO_SUCESSO = 'put_usuario_sucesso';
 export const PUT_USUARIO_ERRO = 'put_usuario_erro';
 export const PUT_EVENTO_SUCESSO = 'put_evento_sucesso';
@@ -36,3 +38,5 @@ export const LIST_MEUS_CONVITES_SUCESSO = 'list_meus_convites_sucesso';
 export const LIST_MEUS_CONVITES_ERRO = 'list_meus_convites_erro';
 export const RESPOSTA_CONVITE_SUCESSO = 'resposta_convite_sucesso';
 export const RESPOSTA_CONVITE_ERR = 'resposta_convite_erro';
+export const MODIFICA_EVENTO_SELECIONADO = 'modifica_evento_selecionado';
+export const LIMPA_CONTATO_BUSCADO = 'limpa_evento_buscado';

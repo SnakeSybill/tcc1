@@ -1,5 +1,6 @@
 import {
     GET_USUARIO_SUCESSO,
+    LIMPA_CONTATO_BUSCADO,
     GET_USUARIO_ERRO,
     PUT_EVENTO_SUCESSO,
     PUT_EVENTO_ERRO,
@@ -18,8 +19,14 @@ import {
     LIST_MEUS_CONVITES_SUCESSO,
     LIST_MEUS_CONVITES_ERRO,
     RESPOSTA_CONVITE_SUCESSO,
-    RESPOSTA_CONVITE_ERRO
+    RESPOSTA_CONVITE_ERRO,
+    MODIFICA_EVENTO_SELECIONADO,
+    GET_USUARIO_CONTATO_SUCESSO,
+    GET_USUARIO_CONTATO_ERRO,
+    PUT_USUARIO_ERRO,
+    PUT_USUARIO_SUCESSO
 } from './../actions/types';
+import { Alert } from 'react-native';
 
 const INITIAL_STATE = {
     loading: false,
@@ -31,7 +38,9 @@ const INITIAL_STATE = {
     },
     eventosCriadosUsuario: [],
     meusConvites: [],
-    eventoSelecionado: {}
+    eventoSelecionado: { criador: "", idEvento: "", nome: "", data: "", local: "", descricao: "", hora: "" },
+    inclusaoConcluida: false,
+    contatoBuscado: {}
 
 }
 
@@ -45,7 +54,7 @@ export default (state = INITIAL_STATE, action) => {
             return state;
 
         case PUT_EVENTO_SUCESSO:
-            return state;
+            return { ...state, eventoSelecionado: action.payload, inclusaoConcluida: true };
 
         case PUT_EVENTO_ERRO:
             return state;
@@ -97,6 +106,32 @@ export default (state = INITIAL_STATE, action) => {
 
         case RESPOSTA_CONVITE_ERRO:
             return state;
+
+        case MODIFICA_EVENTO_SELECIONADO:
+            return { ...state, eventoSelecionado: action.payload };
+
+        case GET_USUARIO_CONTATO_SUCESSO:
+            console.log("Usuario buscado reducer: ", action.payload);
+            return { ...state, contatoBuscado: action.payload }
+
+        case GET_USUARIO_CONTATO_ERRO:
+            Alert.alert(
+                'Algo errado não está certo: buscar contato',
+                action.payload,
+                [
+                    { text: 'OK', onPress: () => { } },
+                ],
+            )
+            return { ...state, contatoBuscado: {} };;
+
+        case PUT_USUARIO_ERRO:
+            return { ...state, contatoBuscado: {} };
+        case PUT_USUARIO_SUCESSO:
+            console.log("PUT)USUSARIO_SUCESSO reducer: ", action.payload);
+            return { ...state, usuario: action.payload, contatoBuscado: {} };
+
+        case LIMPA_CONTATO_BUSCADO:
+            return { ...state, contatoBuscado: {} };
     }
     return state;
 }

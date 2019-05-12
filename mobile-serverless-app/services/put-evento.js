@@ -8,8 +8,12 @@ export async function putEvento(event, context) {
     TableName: "eventos",
     Item: {
       idEvento: uuid(),
-      criador: event.requestContext.identity.cognitoIdentityId,
-      local: item.local
+      criador: item.email,
+      local: item.local,
+      data: item.data,
+      descricao: item.descricao,
+      nome: item.nome,
+      hora: item.hora
     }
   };
 

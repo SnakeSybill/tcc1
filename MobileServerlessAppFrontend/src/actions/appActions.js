@@ -3,7 +3,7 @@ import {
     MODIFICA_EMAIL,
     MODIFICA_SENHA,
     MODIFICA_NOME,
-    MODIFICA_CODIGO_CONFIRMACAO,
+    MODIFICA_CODIGO_CONFIRMACAO
 } from './types';
 
 // Utils
@@ -41,4 +41,6 @@ export const modificaCodigoConfirmacao = (texto) => (
         payload: texto,
     }
 )
+
+
 

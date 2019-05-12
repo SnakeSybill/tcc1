@@ -4,7 +4,7 @@ import {
     MODIFICA_CODIGO_CONFIRMACAO,
     MODIFICA_SENHA,
     MODIFICA_NOME,
-    LOADING
+    LOADING,
 } from './../actions/types';
 
 const INITIAL_STATE = {

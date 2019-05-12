@@ -36,7 +36,7 @@ class Contatos extends Component {
                         {
                             this.props.usuario.contatos.map((item, i) => (
                                 <TouchableOpacity>
-                                    <Text>{item.idContato}</Text>
+                                    <Text>{item}</Text>
                                 </TouchableOpacity>
 
                             ))

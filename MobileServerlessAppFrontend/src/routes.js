@@ -12,17 +12,17 @@ import viewconvite from "./screens/viewConvite.js";
 import { createStackNavigator, createAppContainer } from "react-navigation";
 
 const routes = createStackNavigator({
+    login,
+    addcontato,
     convites,
     viewconvite,
     inicio,
-    login,
     eventos,
     contatos,
     cadastro,
     welcome,
     agenda,
     addevento,
-    addcontato,
 });
 
 export default createAppContainer(routes);

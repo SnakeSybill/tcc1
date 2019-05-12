@@ -49,6 +49,7 @@ class ViewConvite extends Component {
                     />
                 </View>
             </View>
+
         )
     }
 }

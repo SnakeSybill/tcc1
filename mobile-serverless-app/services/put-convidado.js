@@ -18,7 +18,7 @@ export async function putConvidado(event, context) {
       usernameConvidado: item.usernameConvidado,
       idEvento: item.idEvento,
       nomeEvento: item.nomeEvento,
-      de: event.requestContext.identity.cognitoIdentityId
+      de: item.de
     }
   }
 
@@ -36,7 +36,7 @@ export async function respostaConvite(event, context) {
   const params = {
     TableName: "convidados-evento",
     Item: {
-      username: item.criador,
+      username: item.idConvidado,
       idEvento: item.idEvento,
       confirma: item.confirma
     }

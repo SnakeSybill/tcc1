@@ -88,6 +88,7 @@ export const GetEvento = async (event, context) => {
 export const GetUsuario = async (event, context) => {
   console.log("Objeto evento: ", event);
   const result = await getUsuario(event);
+  console.log("Objeto Resultado: ", result);
   return {
     statusCode: 200,
     body: JSON.stringify({
