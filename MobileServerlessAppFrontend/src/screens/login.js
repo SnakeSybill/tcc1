@@ -36,7 +36,7 @@ class Login extends Component {
                 <Text style={styles.welcome}>Welcome to this App!</Text>
                 <Text style={styles.instructions}>To get started, sign in</Text>
                 <TextInput placeholder="email" value={this.props.email} onChangeText={email => this.props.modificaEmail(email)} />
-                <TextInput placeholder="password" value={this.props.password} onChangeText={password => this.props.modificaSenha(password)} />
+                <TextInput placeholder="password" secureTextEntry={true} value={this.props.password} onChangeText={password => this.props.modificaSenha(password)} />
                 <Button title="Login" disabled={!this.validateForm()} onPress={() => { this.login() }} />
                 <Button title="Cadastro" disabled={!this.validateForm()} onPress={() => { this.props.navigation.navigate('cadastro') }} />
             </View>

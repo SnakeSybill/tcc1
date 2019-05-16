@@ -2,7 +2,6 @@ import {
     LOADING,
     MODIFICA_EMAIL,
     MODIFICA_SENHA,
-    MODIFICA_NOME,
     MODIFICA_CODIGO_CONFIRMACAO
 } from './types';
 
@@ -24,13 +23,6 @@ export const modificaEmail = (texto) => (
 export const modificaSenha = (texto) => (
     {
         type: MODIFICA_SENHA,
-        payload: texto,
-    }
-)
-
-export const modificaNome = (texto) => (
-    {
-        type: MODIFICA_NOME,
         payload: texto,
     }
 )

@@ -3,7 +3,6 @@ import {
     MODIFICA_EMAIL,
     MODIFICA_CODIGO_CONFIRMACAO,
     MODIFICA_SENHA,
-    MODIFICA_NOME,
     LOADING,
 } from './../actions/types';
 
@@ -33,10 +32,6 @@ export default (state = INITIAL_STATE, action) => {
         case MODIFICA_SENHA:
             console.log("Modifica senha reducer");
             return { ...state, password: action.payload };
-
-        case MODIFICA_NOME:
-            console.log("Modifica nome reducer");
-            return { ...state, nome: action.payload };
     }
     return state;
 }

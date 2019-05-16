@@ -1,7 +1,6 @@
 //Authentication
 export const MODIFICA_EMAIL = 'modifica_email';
 export const MODIFICA_SENHA = 'modifica_senha';
-export const MODIFICA_NOME = 'modifica_nome';
 export const MODIFICA_CODIGO_CONFIRMACAO = 'modifica_codigo_confirmacao';
 export const CADASTRO_SUCESSO = 'cadastro_sucesso';
 export const CADASTRO_ERRO = 'cadastro_erro';
@@ -40,3 +39,4 @@ export const RESPOSTA_CONVITE_SUCESSO = 'resposta_convite_sucesso';
 export const RESPOSTA_CONVITE_ERR = 'resposta_convite_erro';
 export const MODIFICA_EVENTO_SELECIONADO = 'modifica_evento_selecionado';
 export const LIMPA_CONTATO_BUSCADO = 'limpa_evento_buscado';
+export const ALTERA_INCLUSAO_CONCLUIDA = 'altera_inclusao_concluida';

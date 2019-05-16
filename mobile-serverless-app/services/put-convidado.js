@@ -8,7 +8,6 @@ export async function putConvidado(event, context) {
     Item: {
       username: item.usernameConvidado,
       idEvento: item.idEvento,
-      confirma: item.confirma
     }
   };
 
@@ -55,6 +54,22 @@ export async function respostaConvite(event, context) {
     console.log("PUT concluido");
     await dynamoDbLib.call("delete", params2);
     console.log("DELETE concluido");
+    if (item.confirma) {
+      var usuarioAgenda = await dynamoDbLib.call('get', {
+        TableName: "usuarios",
+        Key: {
+          username: item.idConvidado,
+        }
+      });
+      console.log("GET concluido", usuarioAgenda);
+      usuarioAgenda.Item.agenda = usuarioAgenda.Item.agenda.concat({ idEvento: item.idEvento, nomeEvento: item.nomeEvento, criador: item.criador });
+      console.log("Agenda alterada", usuarioAgenda);
+      const params3 = {
+        TableName: "usuarios",
+        Item: usuarioAgenda.Item
+      };
+      await dynamoDbLib.call('put', params3);
+    }
     return success(params.Item);
   } catch (e) {
     console.log("Erro: ", e);

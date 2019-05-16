@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import {
     cadastraUsuario, confirmaCadastroUsuario
 } from './../actions/authenticationActions';
-import { modificaSenha, modificaNome, modificaEmail, modificaCodigoConfirmacao, loading as loadingChange } from './../actions/appActions';
+import { modificaSenha, modificaEmail, modificaCodigoConfirmacao, loading as loadingChange } from './../actions/appActions';
 
 class Cadastro extends Component {
 
@@ -39,9 +39,8 @@ class Cadastro extends Component {
                 <View style={styles.container}>
                     <Text style={styles.welcome}>Cadastro!</Text>
                     <Text style={styles.instructions}>Para começar, cadastre-se</Text>
-                    <TextInput placeholder="Nome" value={this.props.nome} onChangeText={nome => this.props.modificaNome(nome)} />
                     <TextInput placeholder="E-mail" value={this.props.email} onChangeText={email => this.props.modificaEmail(email)} />
-                    <TextInput placeholder="Password" value={this.props.password} onChangeText={password => this.props.modificaSenha(password)} />
+                    <TextInput placeholder="Password" secureTextEntry={true} value={this.props.password} onChangeText={password => this.props.modificaSenha(password)} />
                     <Button title="Login" disabled={!this.validateForm()} onPress={() => { this.cadastro() }} />
                 </View>
 
@@ -51,7 +50,7 @@ class Cadastro extends Component {
                 <View style={styles.container}>
                     <Text style={styles.welcome}>Cadastro!</Text>
                     <Text style={styles.instructions}>Digite o código de confirmação</Text>
-                    <TextInput placeholder="Code" value={this.props.codigoConfirmacao} onChangeText={codigoConfirmacao => this.props.modificaCodigoConfirmacao(codigoConfirmacao)} />
+                    <TextInput placeholder="Code" keyboardType="numeric"  value={this.props.codigoConfirmacao} onChangeText={codigoConfirmacao => this.props.modificaCodigoConfirmacao(codigoConfirmacao)} />
                     <Button title="Confirma" disabled={!this.validateForm()} onPress={() => { this.confirma() }} />
                 </View>
             )
@@ -97,7 +96,6 @@ const mapStateToProps = state => (
 export default connect(mapStateToProps,
     {
         modificaSenha,
-        modificaNome,
         modificaEmail,
         modificaCodigoConfirmacao,
         cadastraUsuario,

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, TextInput, Button, Text } from 'react-native';
 //import { CheckBox } from 'react-native-elements';
 import { connect } from 'react-redux';
-import { putEvento, modificaEventoSelecionado, putConvidado } from './../actions/apiActions';
+import { putEvento, modificaEventoSelecionado, putConvidado, alteraInclusaoConcluida } from './../actions/apiActions';
 
 class AddEvento extends Component {
 
@@ -33,11 +33,11 @@ class AddEvento extends Component {
                         <Text style={{ fontSize: 24 }}>Novo Evento</Text>
                     </View>
                     <View style={{ flex: 8, alignItems: "center", alignContent: "center", justifyContent: "center", alignSelf: "center" }}>
-                        <TextInput placeholder="Nome" value={this.props.eventoSelecionado.nome} onChangeText={nome => this.props.modificaEventoSelecionado({ ...this.props.eventoSelecionado, nome })} />
-                        <TextInput placeholder="Local" value={this.props.eventoSelecionado.local} onChangeText={local => this.props.modificaEventoSelecionado({ ...this.props.eventoSelecionado, local })} />
+                        <TextInput placeholder="Nome" maxLength={30} value={this.props.eventoSelecionado.nome} onChangeText={nome => this.props.modificaEventoSelecionado({ ...this.props.eventoSelecionado, nome })} />
+                        <TextInput placeholder="Local" maxLength={30} value={this.props.eventoSelecionado.local} onChangeText={local => this.props.modificaEventoSelecionado({ ...this.props.eventoSelecionado, local })} />
                         <TextInput placeholder="Data" value={this.props.eventoSelecionado.data} onChangeText={data => this.props.modificaEventoSelecionado({ ...this.props.eventoSelecionado, data })} />
                         <TextInput placeholder="Hora" value={this.props.eventoSelecionado.hora} onChangeText={hora => this.props.modificaEventoSelecionado({ ...this.props.eventoSelecionado, hora })} />
-                        <TextInput placeholder="Descrição" value={this.props.eventoSelecionado.descricao} onChangeText={descricao => this.props.modificaEventoSelecionado({ ...this.props.eventoSelecionado, descricao })} />
+                        <TextInput placeholder="Descrição" multiline = {true} numberOfLines = {4} maxLength={300} value={this.props.eventoSelecionado.descricao} onChangeText={descricao => this.props.modificaEventoSelecionado({ ...this.props.eventoSelecionado, descricao })} />
                         <View style={{ flex: 1, flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
                             <Button title="Criar" disabled={!this.validateForm()} onPress={() => { this.props.putEvento(this.props.eventoSelecionado, this.props.navigation) }} />
                         </View>
@@ -73,7 +73,7 @@ class AddEvento extends Component {
                         </View>
                         <View style={{ flex: 1, flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
                             <Button
-                                onPress={() => { this.props.navigation.navigate("inicio") }}
+                                onPress={() => { this.props.alteraInclusaoConcluida(false); this.props.modificaEventoSelecionado({ criador: "", idEvento: "", nome: "", data: "", local: "", descricao: "", hora: "" }); this.props.navigation.navigate("inicio") }}
                                 title="Finalizar"
                                 color="#0F0"
                                 style={{ heigth: 30 }}
@@ -92,7 +92,7 @@ class AddEvento extends Component {
                         </View>
                         <View style={{ flex: 1, flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
                             <Button
-                                onPress={() => { this.props.navigation.navigate("inicio") }}
+                                onPress={() => { this.props.alteraInclusaoConcluida(false); this.props.modificaEventoSelecionado({ criador: "", idEvento: "", nome: "", data: "", local: "", descricao: "", hora: "" }); this.props.navigation.navigate("inicio") }}
                                 title="Finalizar"
                                 color="#0F0"
                                 style={{ heigth: 30 }}
@@ -138,5 +138,5 @@ const mapStateToProps = state => (
 
 export default connect(mapStateToProps,
     {
-        putEvento, modificaEventoSelecionado, putConvidado
+        putEvento, modificaEventoSelecionado, putConvidado, alteraInclusaoConcluida
     })(AddEvento);

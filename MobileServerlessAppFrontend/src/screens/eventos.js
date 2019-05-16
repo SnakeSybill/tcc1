@@ -40,7 +40,7 @@ class Eventos extends Component {
                         <View style={{ flex: 8 }}>
                             {
                                 this.props.eventosCriadosUsuario.map((item, i) => (
-                                    <TouchableOpacity>
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate("viewEvento", {item})}>
                                         <Text>{item.nome}</Text>
                                     </TouchableOpacity>
                                 ))

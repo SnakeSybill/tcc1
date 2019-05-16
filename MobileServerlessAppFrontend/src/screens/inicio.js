@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Button, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
-import { configUsuarioAoLogar, getUsuario, putUsuario, putEvento, getEvento, listEventos, deleteEvento, putConvidado, listConvidados, putMeusConvites, listMeusConvites, respostaConvite } from './../actions/apiActions';
+import { getEventoAgenda, configUsuarioAoLogar, getUsuario, putUsuario, putEvento, getEvento, listEventos, deleteEvento, putConvidado, listConvidados, putMeusConvites, listMeusConvites, respostaConvite } from './../actions/apiActions';
 
 import Rodape from './../components/rodape.js';
 
@@ -21,6 +21,9 @@ class Inicio extends Component {
         this.props.configUsuarioAoLogar(this.props.email);
     }
 
+    verEventoDaAgenda(item){
+        this.props.getEventoAgenda(item, this.props.navigation)
+    }
     render() {
         if (this.props.usuario.agenda.length === 0) {
             return (
@@ -39,8 +42,8 @@ class Inicio extends Component {
                     <View style={{ flex: 8 }}>
                         {
                             this.props.usuario.agenda.map((item, i) => (
-                                <TouchableOpacity >
-                                    <Text>{item.idEvento}</Text>
+                                <TouchableOpacity onPress={() => this.verEventoDaAgenda(item)} >
+                                    <Text>{item.nomeEvento}</Text>
                                 </TouchableOpacity>
                             ))
                         }
@@ -93,5 +96,6 @@ export default connect(mapStateToProps,
         listConvidados,
         putMeusConvites,
         listMeusConvites,
-        respostaConvite
+        respostaConvite,
+        getEventoAgenda
     })(Inicio);

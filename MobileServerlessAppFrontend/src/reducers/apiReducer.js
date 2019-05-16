@@ -24,7 +24,8 @@ import {
     GET_USUARIO_CONTATO_SUCESSO,
     GET_USUARIO_CONTATO_ERRO,
     PUT_USUARIO_ERRO,
-    PUT_USUARIO_SUCESSO
+    PUT_USUARIO_SUCESSO,
+    ALTERA_INCLUSAO_CONCLUIDA
 } from './../actions/types';
 import { Alert } from 'react-native';
 
@@ -40,7 +41,8 @@ const INITIAL_STATE = {
     meusConvites: [],
     eventoSelecionado: { criador: "", idEvento: "", nome: "", data: "", local: "", descricao: "", hora: "" },
     inclusaoConcluida: false,
-    contatoBuscado: {}
+    contatoBuscado: {},
+    listaConvidados: []
 
 }
 
@@ -54,9 +56,23 @@ export default (state = INITIAL_STATE, action) => {
             return state;
 
         case PUT_EVENTO_SUCESSO:
+            Alert.alert(
+                'Evento incluído',
+                "Seu evento foi criado. Convide alguns contatos para participarem dele!",
+                [
+                    { text: 'OK', onPress: () => { } },
+                ],
+            )
             return { ...state, eventoSelecionado: action.payload, inclusaoConcluida: true };
 
         case PUT_EVENTO_ERRO:
+            Alert.alert(
+                'Ops, algo deu errado...',
+                action.payload,
+                [
+                    { text: 'OK', onPress: () => { } },
+                ],
+            )
             return state;
 
         case GET_EVENTOS_UCESSO:
@@ -84,7 +100,8 @@ export default (state = INITIAL_STATE, action) => {
             return state;
 
         case LIST_CONVIDADOS_SUCESSO:
-            return state;
+            debugger;
+            return { ...state, listaConvidados: action.payload };
 
         case LIST_CONVIDADOS_ERRO:
             return state;
@@ -102,9 +119,23 @@ export default (state = INITIAL_STATE, action) => {
             return state;
 
         case RESPOSTA_CONVITE_SUCESSO:
+        Alert.alert(
+            "Repondido",
+            'Sua resposta foi enviada',
+            [
+                { text: 'OK', onPress: () => { } },
+            ],
+        )
             return state;
 
         case RESPOSTA_CONVITE_ERRO:
+        Alert.alert(
+            'Ops, algo deu errado...',
+            action.payload,
+            [
+                { text: 'OK', onPress: () => { } },
+            ],
+        )
             return state;
 
         case MODIFICA_EVENTO_SELECIONADO:
@@ -116,7 +147,7 @@ export default (state = INITIAL_STATE, action) => {
 
         case GET_USUARIO_CONTATO_ERRO:
             Alert.alert(
-                'Algo errado não está certo: buscar contato',
+                'Ops, algo deu errado...',
                 action.payload,
                 [
                     { text: 'OK', onPress: () => { } },
@@ -127,11 +158,13 @@ export default (state = INITIAL_STATE, action) => {
         case PUT_USUARIO_ERRO:
             return { ...state, contatoBuscado: {} };
         case PUT_USUARIO_SUCESSO:
-            console.log("PUT)USUSARIO_SUCESSO reducer: ", action.payload);
             return { ...state, usuario: action.payload, contatoBuscado: {} };
 
         case LIMPA_CONTATO_BUSCADO:
             return { ...state, contatoBuscado: {} };
+
+        case ALTERA_INCLUSAO_CONCLUIDA:
+        return {...state, inclusaoConcluida: action.payload}
     }
     return state;
 }

@@ -26,7 +26,8 @@ import {
     RESPOSTA_CONVITE_ERRO,
     MODIFICA_EVENTO_SELECIONADO,
     GET_USUARIO_CONTATO_SUCESSO,
-    GET_USUARIO_CONTATO_ERRO
+    GET_USUARIO_CONTATO_ERRO,
+    ALTERA_INCLUSAO_CONCLUIDA
 } from './types';
 
 // Usuarios
@@ -229,6 +230,7 @@ function getEventoErro(dispatch, erro) {
 
 export const listEventos = (email) => {
     return dispatch => {
+        debugger;
         let apiName = 'dev-mobile-serverless-app';
         let path = `list-evento/${email}`;
 
@@ -319,15 +321,15 @@ function putConvidadoErro(dispatch, erro) {
     });
 }
 
-export const listConvidados = () => {
+export const listConvidados = (idEvento) => {
     return dispatch => {
+        debugger;
         let apiName = 'dev-mobile-serverless-app';
-        let idEvento = "1f71a37f-d38b-472d-8faa-a14bf7ad7d7c";
         let path = `list-convidados/${idEvento}`;
 
         API.get(apiName, path).then(response => {
             console.log('Retorno API: ', response);
-            listConvidadosSucesso(dispatch, response);
+            listConvidadosSucesso(dispatch, JSON.parse(response.result.body));
         }).catch(error => {
             console.log(error.response);
             listConvidadosErro(dispatch, error);
@@ -419,7 +421,7 @@ function listMeusConvitesErro(dispatch, erro) {
 }
 
 // Resposta
-export const respostaConvite = (resposta, idEvento, criador, emailConvidado) => {
+export const respostaConvite = (resposta, idEvento, criador, nomeEvento, emailConvidado, navigation) => {
     return dispatch => {
         let apiName = 'dev-mobile-serverless-app';
         let path = 'resposta-convite';
@@ -429,11 +431,12 @@ export const respostaConvite = (resposta, idEvento, criador, emailConvidado) => 
                 idEvento,
                 criador,
                 confirma: resposta,
-                idConvidado: emailConvidado
+                idConvidado: emailConvidado,
+                nomeEvento: nomeEvento
             }
         }).then(response => {
             console.log('Retorno API: ', response);
-            respostaConviteSucesso(dispatch, response);
+            respostaConviteSucesso(dispatch, response, navigation);
         }).catch(error => {
             console.log(error.response);
             respostaConviteErro(dispatch, error);
@@ -441,11 +444,12 @@ export const respostaConvite = (resposta, idEvento, criador, emailConvidado) => 
     }
 }
 
-function respostaConviteSucesso(dispatch, response) {
+function respostaConviteSucesso(dispatch, response, navigation) {
     dispatch({
         type: RESPOSTA_CONVITE_SUCESSO,
         payload: response
     });
+    navigation.navigate("inicio");
 }
 
 function respostaConviteErro(dispatch, erro) {
@@ -466,5 +470,35 @@ export const modificaEventoSelecionado = (eventoAlterado) => (
 export const limpaContatoBuscado = () => (
     {
         type: LIMPA_CONTATO_BUSCADO,
+    }
+)
+
+export const getEventoAgenda = (item, navigation) => {
+    return dispatch => {
+        debugger;
+        let apiName = 'dev-mobile-serverless-app';
+        let path = `get-evento/${item.idEvento}/${item.criador}`;
+
+        API.get(apiName, path).then(response => {
+            getEventoAgendaSucesso(dispatch, JSON.parse(response.result.body)[0], navigation);
+        }).catch(error => {
+            console.log(error.response);
+            getEventoErro(dispatch, error);
+        });
+    }
+}
+
+function getEventoAgendaSucesso(dispatch, response, navigation) {
+    dispatch({
+        type: GET_EVENTOS_UCESSO,
+        payload: response
+    });
+    navigation.navigate("viewEvento", {item: response});
+}
+
+export const alteraInclusaoConcluida = (valor) => (
+    {
+        type: ALTERA_INCLUSAO_CONCLUIDA,
+        payload: valor,
     }
 )

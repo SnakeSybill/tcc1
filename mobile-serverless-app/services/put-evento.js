@@ -19,7 +19,19 @@ export async function putEvento(event, context) {
 
   try {
     await dynamoDbLib.call("put", params);
-    console.log("Teste")
+
+    var usuarioAgenda = await dynamoDbLib.call('get', {
+      TableName: "usuarios",
+      Key: {
+        username: item.email,
+      }
+    });
+    usuarioAgenda.Item.agenda = usuarioAgenda.Item.agenda.concat({idEvento: params.Item.idEvento, nomeEvento: item.nome, criador: item.email});
+    const params3 = {
+      TableName: "usuarios",
+      Item: usuarioAgenda.Item
+    };
+    await dynamoDbLib.call('put', params3);
     return params.Item;
   } catch (e) {
     console.log(e);

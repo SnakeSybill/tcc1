@@ -55,13 +55,6 @@ export default (state = INITIAL_STATE, action) => {
 
         case LOGIN_SUCESSO:
         console.log("Login sucesso reducer");
-            Alert.alert(
-                'Bem vindo de volta!',
-                "Teste",
-                [
-                    { text: 'OK', onPress: () => { } },
-                ],
-            )
             return { ...state, usuario: action.payload };
 
         case CONFIRMA_CADASTRO_USUARIO_ERRO:

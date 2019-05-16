@@ -36,13 +36,13 @@ class ViewConvite extends Component {
                 </View>
                 <View style={{ flex: 1, flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
                     <Button
-                        onPress={() => { this.props.respostaConvite(true, this.props.eventoSelecionado.idEvento, this.props.eventoSelecionado.criador, this.props.email) }}
+                        onPress={() => { this.props.respostaConvite(true, this.props.eventoSelecionado.idEvento, this.props.eventoSelecionado.criador, item.nomeEvento, this.props.email, this.props.navigation) }}
                         title="Aceitar"
                         color="#0F0"
                         style={{ heigth: 30 }}
                     />
                     <Button
-                        onPress={() => { this.props.respostaConvite(false, this.props.eventoSelecionado.idEvento, this.props.eventoSelecionado.criador, this.props.email) }}
+                        onPress={() => { this.props.respostaConvite(false, this.props.eventoSelecionado.idEvento, this.props.eventoSelecionado.criador, item.nomeEvento, this.props.email, this.props.navigation) }}
                         title="Recusar"
                         color="#F00"
                         style={{ heigth: 30 }}
