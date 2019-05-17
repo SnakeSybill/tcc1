@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Button } from 'react-native';
+import { StyleSheet, View, Text, Button, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
-import { respostaConvite, getEvento } from './../actions/apiActions';
+import { respostaConvite, getEvento, modificaLoading } from './../actions/apiActions';
 
 class ViewConvite extends Component {
 
@@ -16,6 +16,7 @@ class ViewConvite extends Component {
     }
 
     componentWillMount() {
+        this.props.modificaLoading(true);
         this.props.getEvento(this.props.navigation.getParam('item').idEvento, this.props.navigation.getParam('item').de);
     }
 
@@ -27,27 +28,31 @@ class ViewConvite extends Component {
                 <View style={{ flex: 1 }}>
                     <Text style={{ fontSize: 24 }}>{item.nomeEvento}</Text>
                 </View>
-                <View style={{ flex: 8, alignItems: "center", alignContent: "center", justifyContent: "center", alignSelf: "center" }}>
-                    <Text style={{ fontSize: 20 }}>De: {item.de}</Text>
-                    <Text style={{ fontSize: 20 }}>Para: {item.usernameConvidado}</Text>
-                    <Text style={{ fontSize: 20 }}>Local: {this.props.eventoSelecionado.local}</Text>
-                    <Text style={{ fontSize: 20 }}>Data: {this.props.eventoSelecionado.data}</Text>
-                    <Text style={{ fontSize: 20 }}>Hora: {this.props.eventoSelecionado.hora}</Text>
-                </View>
-                <View style={{ flex: 1, flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
-                    <Button
-                        onPress={() => { this.props.respostaConvite(true, this.props.eventoSelecionado.idEvento, this.props.eventoSelecionado.criador, item.nomeEvento, this.props.email, this.props.navigation) }}
-                        title="Aceitar"
-                        color="#0F0"
-                        style={{ heigth: 30 }}
-                    />
-                    <Button
-                        onPress={() => { this.props.respostaConvite(false, this.props.eventoSelecionado.idEvento, this.props.eventoSelecionado.criador, item.nomeEvento, this.props.email, this.props.navigation) }}
-                        title="Recusar"
-                        color="#F00"
-                        style={{ heigth: 30 }}
-                    />
-                </View>
+
+                {
+                    this.props.loadingAPI ? <ActivityIndicator size="large" /> :
+                        <View style={{ flex: 8, alignItems: "center", alignContent: "center", justifyContent: "center", alignSelf: "center" }}>
+                            <Text style={{ fontSize: 20 }}>De: {item.de}</Text>
+                            <Text style={{ fontSize: 20 }}>Para: {item.usernameConvidado}</Text>
+                            <Text style={{ fontSize: 20 }}>Local: {this.props.eventoSelecionado.local}</Text>
+                            <Text style={{ fontSize: 20 }}>Data: {this.props.eventoSelecionado.data}</Text>
+                            <Text style={{ fontSize: 20 }}>Hora: {this.props.eventoSelecionado.hora}</Text>
+                            <View style={{ flex: 1, flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
+                                <Button
+                                    onPress={() => { this.props.modificaLoading(true); this.props.respostaConvite(true, this.props.eventoSelecionado.idEvento, this.props.eventoSelecionado.criador, item.nomeEvento, this.props.email, this.props.navigation) }}
+                                    title="Aceitar"
+                                    color="#0F0"
+                                    style={{ heigth: 30 }}
+                                />
+                                <Button
+                                    onPress={() => { this.props.modificaLoading(true); this.props.respostaConvite(false, this.props.eventoSelecionado.idEvento, this.props.eventoSelecionado.criador, item.nomeEvento, this.props.email, this.props.navigation) }}
+                                    title="Recusar"
+                                    color="#F00"
+                                    style={{ heigth: 30 }}
+                                />
+                            </View>
+                        </View>
+                }
             </View>
 
         )
@@ -78,11 +83,12 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => (
     {
         eventoSelecionado: state.apiReducer.eventoSelecionado,
+        loadingAPI: state.apiReducer.loadingAPI,
         email: state.appReducer.email,
     }
 )
 
 export default connect(mapStateToProps,
     {
-        respostaConvite, getEvento
+        respostaConvite, getEvento, modificaLoading
     })(ViewConvite);

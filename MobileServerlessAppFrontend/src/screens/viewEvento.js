@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Button } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
-import { respostaConvite, getEvento, listConvidados, modificaEventoSelecionado } from './../actions/apiActions';
+import { respostaConvite, getEvento, listConvidados, modificaEventoSelecionado, modificaLoading } from './../actions/apiActions';
 
 class ViewConvite extends Component {
 
@@ -16,37 +16,36 @@ class ViewConvite extends Component {
     }
 
     componentWillMount() {
-        this.props.getEvento(this.props.navigation.getParam('item').idEvento, this.props.navigation.getParam('item').criador,);
+        this.props.modificaLoading(true);
+        this.props.getEvento(this.props.navigation.getParam('item').idEvento, this.props.navigation.getParam('item').criador);
         this.props.listConvidados(this.props.navigation.getParam('item').idEvento);
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         this.props.modificaEventoSelecionado({ criador: "", idEvento: "", nome: "", data: "", local: "", descricao: "", hora: "" });
     }
     isCriador(convidador) {
         if (this.props.email != convidador) {
             return (
-                <View>
-                    <View style={{ flex: 3, alignItems: "center", alignContent: "center", justifyContent: "center", alignSelf: "center" }}>
+                <View style={{ flex: 3}}>
+                    <View style={{ alignItems: "center", alignContent: "center", justifyContent: "center", alignSelf: "center" }}>
                         <Text> Criado por {convidador} </Text>
                     </View>
                     <View style={{ flex: 1, alignItems: "center", alignContent: "center", justifyContent: "center", alignSelf: "center" }}>
-                        
+
                     </View>
                 </View>
             )
         }
         else {
             return (
-                <View>
-                    <View style={{ flex: 1, alignItems: "center", alignContent: "center", justifyContent: "center", alignSelf: "center" }}>
+                <View style={{ flex:3}}>
+                    <View style={{ alignItems: "center", alignContent: "center", justifyContent: "center", alignSelf: "center" }}>
                         <Text> Convidados </Text>
-                    </View>
-                    <View style={{ flex: 3, alignItems: "center", alignContent: "center", justifyContent: "center", alignSelf: "center" }}>
                         {
                             this.props.listaConvidados.map((item, i) => (
                                 <TouchableOpacity >
-                                    <Text>{item.username}, Status: {item.confirma == undefined ? "Aguardando resposta":item.confirma ? "Aceito" : "Recusado"}</Text>
+                                    <Text>{item.username}, Status: {item.confirma == undefined ? "Aguardando resposta" : item.confirma ? "Aceito" : "Recusado"}</Text>
                                 </TouchableOpacity>
                             )
                             )
@@ -60,20 +59,22 @@ class ViewConvite extends Component {
         console.log("Parametro: ", this.props.navigation.getParam('item'));
         const item = this.props.navigation.getParam('item');
         return (
-            <View style={styles.container}>
-                <View style={{ flex: 1 }}>
-                    <Text style={{ fontSize: 24 }}>{item.nomeEvento}</Text>
-                </View>
-                <View style={{ flex: 4, alignItems: "center", alignContent: "center", justifyContent: "center", alignSelf: "center" }}>
-                    <Text style={{ fontSize: 20 }}>Local: {this.props.eventoSelecionado.local}</Text>
-                    <Text style={{ fontSize: 20 }}>Data: {this.props.eventoSelecionado.data}</Text>
-                    <Text style={{ fontSize: 20 }}>Hora: {this.props.eventoSelecionado.hora}</Text>
-                </View>
-                {
-                    this.isCriador(this.props.eventoSelecionado.criador)
-                }
-            </View>
 
+            this.props.loadingAPI ? <ActivityIndicator size="large" />
+                :
+                < View style={styles.container} >
+                    <View style={{ flex: 1 }}>
+                        <Text style={{ fontSize: 24 }}>{item.nomeEvento}</Text>
+                    </View>
+                    <View style={{ flex: 4, alignItems: "center", alignContent: "center", justifyContent: "center", alignSelf: "center" }}>
+                        <Text style={{ fontSize: 20 }}>Local: {this.props.eventoSelecionado.local}</Text>
+                        <Text style={{ fontSize: 20 }}>Data: {this.props.eventoSelecionado.data}</Text>
+                        <Text style={{ fontSize: 20 }}>Hora: {this.props.eventoSelecionado.hora}</Text>
+                    </View>
+                    {
+                        this.isCriador(this.props.eventoSelecionado.criador)
+                    }
+                </View >
         )
     }
 }
@@ -104,10 +105,11 @@ const mapStateToProps = state => (
         eventoSelecionado: state.apiReducer.eventoSelecionado,
         email: state.appReducer.email,
         listaConvidados: state.apiReducer.listaConvidados,
+        loadingAPI: state.apiReducer.loadingAPI,
     }
 )
 
 export default connect(mapStateToProps,
     {
-        respostaConvite, getEvento, listConvidados, modificaEventoSelecionado
+        respostaConvite, getEvento, listConvidados, modificaEventoSelecionado, modificaLoading
     })(ViewConvite);

@@ -6,7 +6,7 @@ import {
 } from './types';
 
 // Utils
-export const loading = (valor) => (
+export const modificaLoading = (valor) => (
     {
         type: LOADING,
         payload: valor,

@@ -7,7 +7,7 @@ import {
 } from './../actions/types';
 
 const INITIAL_STATE = {
-    loading: false,
+    
     testeRetornoApi: [],
     nome: 'admin',
     password: 'Hambotregga1!',

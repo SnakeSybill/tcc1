@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
-import { getEventoAgenda, configUsuarioAoLogar, getUsuario, putUsuario, putEvento, getEvento, listEventos, deleteEvento, putConvidado, listConvidados, putMeusConvites, listMeusConvites, respostaConvite } from './../actions/apiActions';
+import { modificaLoading, getEventoAgenda, configUsuarioAoLogar, } from './../actions/apiActions';
 
 import Rodape from './../components/rodape.js';
 
@@ -18,6 +18,7 @@ class Inicio extends Component {
     }
 
     componentWillMount() {
+        this.props.modificaLoading(true);
         this.props.configUsuarioAoLogar(this.props.email);
     }
 
@@ -27,6 +28,7 @@ class Inicio extends Component {
     render() {
         if (this.props.usuario.agenda.length === 0) {
             return (
+                this.props.loadingAPI ? (<ActivityIndicator size="large" />) : 
                 <View style={styles.container}>
                     <View style={{ flex: 1 }}></View>
                     <View style={{ flex: 8, alignItems: "center", alignContent: "center", justifyContent: "center", alignSelf: "center" }}>
@@ -37,6 +39,7 @@ class Inicio extends Component {
             )
         } else {
             return (
+                this.props.loadingAPI ? (<ActivityIndicator size="large" />) : 
                 <View style={styles.container}>
                     <Text style={{ flex: 1 }}>Agenda de {this.props.usuario.username}</Text>
                     <View style={{ flex: 8 }}>
@@ -76,7 +79,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => (
     {
-        loading: state.appReducer.loading,
+        loadingAPI: state.apiReducer.loadingAPI,
         nome: state.appReducer.nome,
         usuario: state.apiReducer.usuario,
         email: state.appReducer.email,
@@ -86,16 +89,6 @@ const mapStateToProps = state => (
 export default connect(mapStateToProps,
     {
         configUsuarioAoLogar,
-        getUsuario,
-        putUsuario,
-        putEvento,
-        getEvento,
-        listEventos,
-        deleteEvento,
-        putConvidado,
-        listConvidados,
-        putMeusConvites,
-        listMeusConvites,
-        respostaConvite,
-        getEventoAgenda
+        getEventoAgenda,
+        modificaLoading
     })(Inicio);

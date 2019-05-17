@@ -11,6 +11,8 @@ export const REENVIA_CODIGO_CONFIRMACAO_USUARIO_ERRO = 'reenvia_codigo_confirmac
 export const CONFIRMA_CADASTRO_USUARIO_SUCESSO = 'confirma_cadastro_usuario_sucesso';
 export const CONFIRMA_CADASTRO_USUARIO_ERRO = 'confirma_cadastro_usuario_erro';
 export const LOADING = 'loading';
+export const LOADING_AUTH = 'loading_AUTH';
+export const LOADING_API = 'loading_API';
 
 //App
 export const GET_USUARIO_SUCESSO = 'get_usuario_sucesso';

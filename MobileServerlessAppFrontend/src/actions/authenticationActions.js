@@ -7,9 +7,16 @@ import {
     LOGIN_ERRO,
     CONFIRMA_CADASTRO_USUARIO_SUCESSO,
     CONFIRMA_CADASTRO_USUARIO_ERRO,
-    LOADING
+    LOADING_AUTH
 } from './types';
 import { putUsuario } from './apiActions';
+
+export const modificaLoading = (valor) => (
+    {
+        type: LOADING_AUTH,
+        payload: valor,
+    }
+)
 
 export const cadastraUsuario = (nome, email, senha) => {
     return dispatch => {
@@ -94,11 +101,13 @@ export const loginUsuario = (email, password, navigation) => {
         Auth.signIn(email, password)
             .then(usuario => {
                 console.log("Sucesso ao logar: ", usuario);
+                modificaLoading(false);
                 loginUsuarioSuccess(dispatch, navigation, usuario);
             })
             .catch(erro => {
                 console.log("Erro ao logar: ", erro);
                 loginUsuarioError(dispatch, erro);
+                modificaLoading(false);
             });
     }
 }

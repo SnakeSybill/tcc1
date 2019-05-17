@@ -27,8 +27,16 @@ import {
     MODIFICA_EVENTO_SELECIONADO,
     GET_USUARIO_CONTATO_SUCESSO,
     GET_USUARIO_CONTATO_ERRO,
-    ALTERA_INCLUSAO_CONCLUIDA
+    ALTERA_INCLUSAO_CONCLUIDA,
+    LOADING_API
 } from './types';
+
+export const modificaLoading = (valor) => (
+    {
+        type: LOADING_API,
+        payload: valor,
+    }
+)
 
 // Usuarios
 export const configUsuarioAoLogar = (username) => {
