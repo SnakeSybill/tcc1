@@ -25,13 +25,16 @@ class Contatos extends Component {
                     <View style={{ flex: 8, alignItems: "center", alignContent: "center", justifyContent: "center", alignSelf: "center" }}>
                         <Text>Você ainda não possui contatos</Text>
                     </View>
-                    <Rodape pagina="contatos" navigation={this.props.navigation}/>
+                    <Rodape pagina="contatos" navigation={this.props.navigation} />
                 </View>
             )
         } else {
             return (
                 <View style={styles.container}>
-                    <Text style={{ flex: 1 }}>Contatos de {this.props.usuario.username}</Text>
+                    <View style={{ flex: 1, alignContent: "center", paddingVertical: 15 }}>
+                        <Text style={{ fontSize: 18, paddingHorizontal: 20, color: "#000" }}>Contatos de {this.props.usuario.username}</Text>
+                    </View>
+
                     <View style={{ flex: 8 }}>
                         {
                             this.props.usuario.contatos.map((item, i) => (
@@ -43,7 +46,7 @@ class Contatos extends Component {
                         }
 
                     </View>
-                    <Rodape pagina="contatos" navigation={this.props.navigation}/>
+                    <Rodape pagina="contatos" navigation={this.props.navigation} />
                 </View>
             )
         }

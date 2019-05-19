@@ -45,7 +45,9 @@ class Convites extends Component {
                         <ActivityIndicator size="large" />
                     </View> :
                     <View style={styles.container}>
-                        <Text style={{ flex: 1 }}>Convites para {this.props.usuario.username}</Text>
+                        <View style={{ flex: 1, alignContent: "center", paddingVertical: 15 }}>
+                            <Text style={{ fontSize: 18, paddingHorizontal: 20, color: "#000" }}>Convites para {this.props.usuario.username}</Text>
+                        </View>
                         <View style={{ flex: 8 }}>
                             {
                                 this.props.meusConvites.map((item, i) => (

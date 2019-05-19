@@ -72,9 +72,9 @@ class AddContato extends Component {
         if (this.isEmpty(this.props.contatoBuscado)) {
             return (
                 <View style={styles.container}>
-                    <View style={{ flex: 1 }}>
-                        <Text>Buscar Contato</Text>
-                    </View>
+                    <View style={{ flex: 1, alignContent: "center", paddingVertical: 15 }}>
+                            <Text style={{ fontSize: 18, paddingHorizontal: 20, color: "#000" }}>Buscar contato</Text>
+                        </View>
                     {
                         this.props.loadingAPI ? <ActivityIndicator size="large" /> :
                             <View style={{ flex: 8, alignItems: "center", alignContent: "center", justifyContent: "center", alignSelf: "center" }}>

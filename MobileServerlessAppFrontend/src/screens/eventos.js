@@ -42,7 +42,9 @@ class Eventos extends Component {
             return (
                 this.props.loadingAPI ? (<ActivityIndicator size="large" />) :
                     <View style={styles.container}>
-                        <Text style={{ flex: 1 }}>Eventos criados por {this.props.usuario.username}</Text>
+                        <View style={{ flex: 1, justifyContent: "center", alignContent: "center", paddingVertical: 15 }}>
+                            <Text style={{ fontSize: 18, paddingHorizontal: 20, color: "#000" }}>Eventos criados por {this.props.usuario.username}</Text>
+                        </View>
                         <View style={{ flex: 8 }}>
                             {
                                 this.props.eventosCriadosUsuario.map((item, i) => (

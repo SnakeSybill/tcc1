@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TextInput, Button, ActivityIndicator } from 'react-native';
-import DatePicker from 'react-native-datepicker';
+import { StyleSheet, Text, View, TextInput, Button, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { Divider } from 'react-native-material-ui';
 import { connect } from 'react-redux';
 import {
     loginUsuario, modificaLoading
@@ -35,11 +35,12 @@ class Login extends Component {
     render() {
         return (
             <View style={styles.container}>
+                
                 <Text style={styles.welcome}>Welcome to this App!</Text>
                 <Text style={styles.instructions}>To get started, sign in</Text>
                 <TextInput editable={!this.props.loadingAuth} placeholder="email" value={this.props.email} onChangeText={email => this.props.modificaEmail(email)} />
-                <TextInput editable={!this.props.loadingAuth} placeholder="password" secureTextEntry={true} value={this.props.password} onChangeText={password => this.props.modificaSenha(password)} /> 
-                
+                <TextInput editable={!this.props.loadingAuth} placeholder="password" secureTextEntry={true} value={this.props.password} onChangeText={password => this.props.modificaSenha(password)} />
+
                 {
                     this.props.loadingAuth ? (
                         <ActivityIndicator size="large" />

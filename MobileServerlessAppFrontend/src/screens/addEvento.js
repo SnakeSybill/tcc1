@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, TextInput, Button, Text, ActivityIndicator } from 'react-native';
-//import { CheckBox } from 'react-native-elements';
+import { Checkbox } from 'react-native-material-ui';
 import DatePicker from 'react-native-datepicker';
 import { connect } from 'react-redux';
 import { putEvento, modificaEventoSelecionado, putConvidado, alteraInclusaoConcluida, modificaLoading } from './../actions/apiActions';
@@ -15,11 +15,12 @@ class AddEvento extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { dataHour: new Date() };
+        this.state = { dataHour: new Date(), inviteds: [] };
     }
 
     componentWillMount() {
         this.props.modificaEventoSelecionado({ ...this.props.eventoSelecionado, email: this.props.email });
+        this.props.usuario.contatos.forEach(() => this.stateinviteds.push(false))
     }
 
     validateForm() {
@@ -41,7 +42,9 @@ class AddEvento extends Component {
             return (
                 <View style={styles.container}>
                     <View style={{ flex: 1 }}>
-                        <Text style={{ fontSize: 24 }}>Novo Evento</Text>
+                    <View style={{ flex: 1, alignContent: "center", paddingVertical: 15 }}>
+                            <Text style={{ fontSize: 18, paddingHorizontal: 20, color: "#000" }}>Novo evento</Text>
+                        </View>
                     </View>
                     <View style={{ flex: 8, alignItems: "center", alignContent: "center", justifyContent: "center", alignSelf: "center" }}>
                         <TextInput editable={!this.props.loadingAPI} placeholder="Nome" maxLength={30} value={this.props.eventoSelecionado.nome} onChangeText={nome => this.props.modificaEventoSelecionado({ ...this.props.eventoSelecionado, nome })} />
@@ -95,16 +98,28 @@ class AddEvento extends Component {
                 return (
 
                     <View style={styles.container}>
-                        <View style={{ flex: 1 }}>
-                            <Text>Convidar Contatos</Text>
+                        <View style={{ flex: 1, alignContent: "center", paddingVertical: 15 }}>
+                            <Text style={{ fontSize: 18, paddingHorizontal: 20, color: "#000" }}>Convidar contatos</Text>
                         </View>
                         <View style={{ flex: 8, alignItems: "center", alignContent: "flex-start", justifyContent: "center", alignSelf: "center" }}>
                             {
+                                
                                 this.props.usuario.contatos.map((item, i) => (
                                     <View style={{ flexDirection: "row" }}>
-                                    
+                                    <Checkbox label={item} value="invited" checked={lista[i]} disabled={lista[i]} onCheck={() => {
+                                            let lista = this.state.inviteds;
+                                            lista[i] = true;
+                                            this.setState({inviteds: lista});
+                                            /* this.props.putConvidado({
+                                                idEvento: this.props.eventoSelecionado.idEvento,
+                                                usernameConvidado: item,
+                                                nomeEvento: this.props.eventoSelecionado.nome,
+                                                confirma: false,
+                                                de: this.props.email
+                                            }) */
+                                        }}/>
                                         <Button title="Invite" onPress={() => {
-
+                                            item.invited = true;
                                             this.props.putConvidado({
                                                 idEvento: this.props.eventoSelecionado.idEvento,
                                                 usernameConvidado: item,
@@ -131,8 +146,8 @@ class AddEvento extends Component {
             } else {
                 return (
                     <View style={styles.container}>
-                        <View style={{ flex: 1 }}>
-                            <Text>Convidar Contatos</Text>
+                        <View style={{ flex: 1, alignContent: "center", paddingVertical: 15 }}>
+                            <Text style={{ fontSize: 18, paddingHorizontal: 20, color: "#000" }}>Convidar contatos</Text>
                         </View>
                         <View style={{ flex: 8, alignItems: "center", alignContent: "flex-start", justifyContent: "center", alignSelf: "center" }}>
                             <Text>Você ainda não tem contatos para convidar</Text>
