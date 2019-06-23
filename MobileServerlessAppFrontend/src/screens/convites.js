@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
+import { Divider } from 'react-native-material-ui';
 import { listMeusConvites, respostaConvite, modificaLoading } from './../actions/apiActions';
 
 import Rodape from './../components/rodape.js';
@@ -10,6 +11,10 @@ class Convites extends Component {
     static navigationOptions = ({ navigation }) => {
         return {
             title: 'Convites',
+            headerStyle: {
+                backgroundColor: '#000',
+              },
+              headerTintColor: '#fff',
         }
     }
 
@@ -32,7 +37,7 @@ class Convites extends Component {
                     <View style={styles.container}>
                         <View style={{ flex: 1 }}></View>
                         <View style={{ flex: 8, alignItems: "center", alignContent: "center", justifyContent: "center", alignSelf: "center" }}>
-                            <Text>Você não possui convites</Text>
+                            <Text style={{ fontSize: 18, paddingHorizontal: 20 }}>Você não possui convites</Text>
                         </View>
                         <Rodape pagina="convites" navigation={this.props.navigation} />
                     </View>
@@ -48,12 +53,20 @@ class Convites extends Component {
                         <View style={{ flex: 1, alignContent: "center", paddingVertical: 15 }}>
                             <Text style={{ fontSize: 18, paddingHorizontal: 20, color: "#000" }}>Convites para {this.props.usuario.username}</Text>
                         </View>
-                        <View style={{ flex: 8 }}>
+                        <View style={{
+                            flex: 8, justifyContent: 'flex-start',
+                            alignItems: 'center',
+                            backgroundColor: '#FFFFFF',
+                        }}>
                             {
                                 this.props.meusConvites.map((item, i) => (
-                                    <TouchableOpacity onPress={() => this.props.navigation.navigate("viewconvite", { item })} style={{ height: 25, flexDirection: "row", justifyContent: "space-between" }}>
-                                        <Text>{item.nomeEvento}</Text>
+                                    <View style={{ flexDirection: "row" }}>
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate("viewconvite", { item })} style={{ flex: 1, height: 50, borderColor: '#d6d7da', alignContent: "flex-start" }}>
+                                        <Text style={{ fontSize: 16, paddingHorizontal: 20 }}>{item.nomeEvento}</Text>
+                                        <Divider />
                                     </TouchableOpacity>
+                                </View>
+                                    
                                 ))
                             }
                         </View>

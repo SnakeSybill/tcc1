@@ -8,6 +8,10 @@ class AddContato extends Component {
     static navigationOptions = ({ navigation }) => {
         return {
             title: 'Novo Contato',
+            headerStyle: {
+                backgroundColor: '#000',
+              },
+              headerTintColor: '#fff',
         }
     }
 
@@ -80,7 +84,8 @@ class AddContato extends Component {
                             <View style={{ flex: 8, alignItems: "center", alignContent: "center", justifyContent: "center", alignSelf: "center" }}>
                                 <TextInput editable={!this.props.loadingAPI} placeholder="Digite o E-mail" value={this.state.contatoABuscar} onChangeText={contato => this.setState({ contatoABuscar: contato })} />
                                 <Button disabled={this.props.loadingAPI || this.state.contatoABuscar.length == 0} title="Buscar" onPress={() => { this.props.modificaLoading(true); this.props.getUsuarioContato(this.state.contatoABuscar) }} />
-                                <Text>Busque por um contato através do e-mail para adicioná-lo à sua lista de contatos</Text>
+                                <Text style={{fontSize:16, padding:10}}>Busque por um contato através do e-mail para </Text>
+                                <Text style={{fontSize:16, padding:10}}>adicioná-lo à sua lista de contatos</Text>
                             </View>
                     }
                     <View style={{ flex: 1 }}></View>
@@ -95,8 +100,8 @@ class AddContato extends Component {
                         <Button disabled={this.props.loadingAPI || this.state.contatoABuscar.length == 0} title="Buscar" onPress={() => this.props.getUsuarioContato(this.state.contatoABuscar)} />
                     </View>
                     <View style={{ flex: 8, alignItems: "center", alignContent: "center", justifyContent: "center", alignSelf: "center" }}>
-                        <Text>Usuario encontrado</Text>
-                        <Text>E-mail: {this.props.contatoBuscado.username}</Text>
+                        <Text style={{fontSize:16, padding:10}} >Usuario encontrado</Text>
+                        <Text style={{fontSize:16, padding:10}} >E-mail: {this.props.contatoBuscado.username}</Text>
                     </View>
                     {
                         this.props.loadingAPI ? <ActivityIndicator size="large" /> :

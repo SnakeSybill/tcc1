@@ -8,6 +8,10 @@ class ViewConvite extends Component {
     static navigationOptions = ({ navigation }) => {
         return {
             title: 'Visualizar Convite',
+            headerStyle: {
+                backgroundColor: '#000',
+              },
+              headerTintColor: '#fff',
         }
     }
 

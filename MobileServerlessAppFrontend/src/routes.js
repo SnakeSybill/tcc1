@@ -13,8 +13,9 @@ import { createStackNavigator, createAppContainer } from "react-navigation";
 
 const routes = createStackNavigator({
     login,
-    viewEvento,
+    addevento,
     addcontato,
+    viewEvento,
     convites,
     viewconvite,
     inicio,
@@ -22,7 +23,6 @@ const routes = createStackNavigator({
     contatos,
     cadastro,
     welcome,
-    addevento,
 });
 
 export default createAppContainer(routes);

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { StatusBar } from 'react-native';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import ReduxThunk from 'redux-thunk';
@@ -33,6 +34,7 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={this.store}>
+        <StatusBar backgroundColor="#000" />
         <Nav />
       </Provider>
     );

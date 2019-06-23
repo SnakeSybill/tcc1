@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, ActivityIndicator, Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
+import { Divider } from 'react-native-material-ui';
 import { listEventos, modificaLoading } from './../actions/apiActions';
 
 import Rodape from './../components/rodape.js';
@@ -10,6 +11,10 @@ class Eventos extends Component {
     static navigationOptions = ({ navigation }) => {
         return {
             title: 'Eventos',
+            headerStyle: {
+                backgroundColor: '#000',
+              },
+              headerTintColor: '#fff',
         }
     }
 
@@ -32,7 +37,7 @@ class Eventos extends Component {
                     <View style={styles.container}>
                         <View style={{ flex: 1 }}></View>
                         <View style={{ flex: 8, alignItems: "center", alignContent: "center", justifyContent: "center", alignSelf: "center" }}>
-                            <Text>Você ainda não possui eventos criados</Text>
+                            <Text style={{ fontSize: 18, paddingHorizontal: 20 }}>Você ainda não possui eventos criados</Text>
                         </View>
                         <Rodape pagina="eventos" navigation={this.props.navigation} />
                     </View>
@@ -41,16 +46,25 @@ class Eventos extends Component {
         else {
             return (
                 this.props.loadingAPI ? (<ActivityIndicator size="large" />) :
+
                     <View style={styles.container}>
                         <View style={{ flex: 1, justifyContent: "center", alignContent: "center", paddingVertical: 15 }}>
                             <Text style={{ fontSize: 18, paddingHorizontal: 20, color: "#000" }}>Eventos criados por {this.props.usuario.username}</Text>
                         </View>
-                        <View style={{ flex: 8 }}>
+                        <View style={{
+                            flex: 8, justifyContent: 'flex-start',
+                            alignItems: 'center',
+                            backgroundColor: '#FFFFFF',
+                        }}>
                             {
                                 this.props.eventosCriadosUsuario.map((item, i) => (
-                                    <TouchableOpacity onPress={() => this.props.navigation.navigate("viewEvento", { item })}>
-                                        <Text>{item.nome}</Text>
-                                    </TouchableOpacity>
+
+                                    <View style={{ flexDirection: "row" }}>
+                                        <TouchableOpacity style={{ flex: 1, height: 50, borderColor: '#d6d7da', alignContent: "flex-start" }} onPress={() => this.props.navigation.navigate("viewEvento", { item })}>
+                                            <Text style={{ fontSize: 16, paddingHorizontal: 20 }}>{item.nome}</Text>
+                                            <Divider />
+                                        </TouchableOpacity>
+                                    </View>
                                 ))
                             }
                         </View>

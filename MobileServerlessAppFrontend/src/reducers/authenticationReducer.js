@@ -45,10 +45,10 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, esperandoCodigoConfirmacao: true, loadingAuth: false };
 
         case LOGIN_ERRO:
-            console.log("Login erro reducer");
+            console.log("Login erro reducer: ", action.payload);
             Alert.alert(
                 'Algo errado não está certo: login',
-                action.payload,
+                action.payload.message,
                 [
                     { text: 'OK', onPress: () => { } },
                 ],
@@ -63,7 +63,7 @@ export default (state = INITIAL_STATE, action) => {
             console.log("Confirmacao de cadastro erro reducer");
             Alert.alert(
                 'Algo errado não está certo: confirmacao',
-                action.payload,
+                action.payload.message,
                 [
                     { text: 'OK', onPress: () => { } },
                 ],

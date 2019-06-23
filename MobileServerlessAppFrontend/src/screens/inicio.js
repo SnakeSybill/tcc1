@@ -12,6 +12,10 @@ class Inicio extends Component {
 
         return {
             title: 'Agenda',
+            headerStyle: {
+                backgroundColor: '#000',
+              },
+              headerTintColor: '#fff',
         }
     }
 
@@ -50,7 +54,7 @@ class Inicio extends Component {
                     <View style={styles.container}>
                         <View style={{ flex: 1 }}></View>
                         <View style={{ flex: 8, alignItems: "center", alignContent: "center", justifyContent: "center", alignSelf: "center" }}>
-                            <Text>Você ainda não possui nada em sua agenda</Text>
+                            <Text style={{ fontSize: 18, paddingHorizontal: 20 }}>Você ainda não possui nada em sua agenda</Text>
                         </View>
                         <Rodape pagina="inicio" navigation={this.props.navigation} />
                     </View>
@@ -65,7 +69,7 @@ class Inicio extends Component {
                         <View style={{
                             flex: 8, justifyContent: 'flex-start',
                             alignItems: 'center',
-                            backgroundColor: '#F5FCFF',
+                            backgroundColor: '#FFFFFF',
                         }}>
                             {
                                 this.props.usuario.agenda.map((item, i) => (
@@ -91,7 +95,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#F5FCFF',
+        backgroundColor: '#FFFFFF',
     },
     welcome: {
         fontSize: 20,
