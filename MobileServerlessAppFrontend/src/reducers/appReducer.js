@@ -10,8 +10,8 @@ const INITIAL_STATE = {
     
     testeRetornoApi: [],
     nome: 'admin',
-    password: 'Hambotregga1!',
-    email: 'igorgonribsilva@gmail.com',
+    password: '',
+    email: '',
     codigoConfirmacao: ""
 }
 

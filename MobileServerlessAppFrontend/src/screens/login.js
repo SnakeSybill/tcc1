@@ -54,7 +54,7 @@ class Login extends Component {
                     ) : (
                             <View style={{ flex: 1, justifyContent: 'space-around', alignItems: 'center', width: 100 }}>
                                 <Button title="Login" color="#000" disabled={!this.validateForm()} onPress={() => { this.login() }} />
-                                <Button title="Cadastro" color="#AAA" disabled={!this.validateForm()} onPress={() => { this.props.navigation.navigate('cadastro') }} />
+                                <Button title="Cadastro" color="#AAA" onPress={() => { this.props.navigation.navigate('cadastro') }} />
                             </View>
                         )
                 }

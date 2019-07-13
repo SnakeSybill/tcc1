@@ -7,7 +7,7 @@ import reducers from './src/reducers';
 import Nav from "./src/routes";
 import Amplify from "aws-amplify";
 import config from "./config";
-
+console.disableYellowBox = true;
 Amplify.configure({
   Auth: {
     mandatorySignIn: true,
@@ -30,7 +30,7 @@ Amplify.configure({
 export default class App extends Component {
   
   store = createStore(reducers, applyMiddleware(ReduxThunk))
-  
+
   render() {
     return (
       <Provider store={this.store}>
